@@ -1,3 +1,11 @@
 ./venv
 /venv
 /wiki_content.db
+/env
+/.env
+
+/wrong_answers
+/wrong_answers_context_summ
+/venv
+
+/data

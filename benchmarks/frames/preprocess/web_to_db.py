@@ -2,15 +2,13 @@ import asyncio
 import pandas as pd
 import ast
 import sqlite3
-import requests # Still imported, though not used in the main async flow now
-import time
-import os
 import sys
 from urllib.parse import urlparse
 import aiohttp
 from bs4 import BeautifulSoup
 
-from benchmarks.frames.config import DATA_URL # Import BeautifulSoup
+from benchmarks.frames.config import DATA_URL, DATABASE_NAME, TABLE_NAME
+from benchmarks.frames.repo.wiki_db import get_content_from_db # Import BeautifulSoup
 
 # --- Configuration ---
 # URL of the dataset
@@ -129,7 +127,7 @@ async def fetch_and_store_content_async(links_set: set, db_path: str):
     Fetches content for links in batches asynchronously, extracts text, and stores in SQLite.
     Logs failed URLs to a file.
     """
-    setup_database(db_path) # Ensure database and table exist
+    # setup_database(db_path) # Ensure database and table exist
 
     conn = None
     failed_file = None # File handle for failed URLs
@@ -242,13 +240,6 @@ async def fetch_and_store_content_async(links_set: set, db_path: str):
 # --- Main execution ---
 
 if __name__ == "__main__":
-    # Optional: Clear the failed.txt file at the start if you want a fresh log each run
-    # try:
-    #     if os.path.exists(FAILED_URLS_FILE):
-    #         os.remove(FAILED_URLS_FILE)
-    #         print(f"Cleared previous failed URLs log: {FAILED_URLS_FILE}")
-    # except Exception as e:
-    #     print(f"Error clearing failed URLs file: {e}", file=sys.stderr)
 
     print(f"Loading data from {DATA_URL}...")
     try:

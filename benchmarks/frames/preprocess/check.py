@@ -6,7 +6,6 @@ failed_links = ['https://en.wikipedia.org/wiki/2021_French_Open_%E2%80%93_Men%25
 
 df = pd.read_csv(DATA_URL, sep='\t')
 
-
 def check_faild_links(df: pd.DataFrame) -> set:
     """
     Extracts a unique set of Wikipedia links from the 'wiki_links' column.
